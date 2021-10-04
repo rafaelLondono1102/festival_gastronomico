@@ -107,6 +107,7 @@ class RestaurantController extends Controller
         Session::flash('success', 'Restaurante editado exitosamente');
 
         return redirect(route('home'));
+        //return back();
     }
 
     /**
@@ -117,7 +118,9 @@ class RestaurantController extends Controller
      */
     public function destroy(Restaurant $restaurant)
     {
-        //
+        $restaurant->delete();
+        Session::flash('success', 'Restaurante removido exitosamente');
+        return redirect(route('home'));
     }
 
 
