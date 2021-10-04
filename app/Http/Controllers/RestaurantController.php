@@ -49,7 +49,7 @@ class RestaurantController extends Controller
      */
     public function show(Restaurant $restaurant)
     {
-        //
+        return view('restaurants.show',compact('restaurant'));
     }
 
     /**
@@ -91,7 +91,7 @@ class RestaurantController extends Controller
     ////////////////////////////////
     public function showFrontPage(){
         $restaurants=Restaurant::orderBy('name','asc')->get(); 
-        
+
         return view('front_page.index',compact('restaurants'));
     }
 }
