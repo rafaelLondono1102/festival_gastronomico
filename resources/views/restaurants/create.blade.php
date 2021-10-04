@@ -2,6 +2,18 @@
 @section('content')
     <div class="container">
         <h1>Nuevo restaurante</h1>
+
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+                </ul>
+                
+            </div>
+        @endif
+
         {{ Form::open(['route' => 'restaurants.store','method' => 'post']) }}
             <div class="mb-3">
                 {{ Form::label('name','Nombre',['class' => 'form-label']) }}
