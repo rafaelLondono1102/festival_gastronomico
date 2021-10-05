@@ -13,7 +13,7 @@
                     <?php
                         $restaurant = $restaurants[($i*4)+$j]
                     ?>
-                    <div class="col-3">
+                    <div class="col-3 mb-3">
                         <div class="card">
                             <img src="{{ asset('images/restaurant.png') }}" class="card-img-top" alt="...">
                             <div class="card-body">
@@ -28,6 +28,6 @@
             @endfor
         </div>
     @endfor
-   
+   {{$restaurants->links()}}
 </div>
 @endsection

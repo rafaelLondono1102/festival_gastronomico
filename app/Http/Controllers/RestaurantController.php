@@ -127,7 +127,7 @@ class RestaurantController extends Controller
 
     ////////////////////////////////
     public function showFrontPage(){
-        $restaurants=Restaurant::orderBy('name','asc')->get(); 
+        $restaurants=Restaurant::orderBy('name','asc')->paginate(8); 
 
         return view('front_page.index',compact('restaurants'));
     }
