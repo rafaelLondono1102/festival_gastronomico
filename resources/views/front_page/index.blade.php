@@ -2,6 +2,12 @@
 @section('content')
 <div class="container">
     <h1>Nuestros Restaurantes</h1>
+    {{ Form::open(['url' => route('front_page.index'), 'method' => 'get']) }}
+        <div class='input-group mb-2 mt-1'>
+            {{ Form::select('filter', $categories, $filter,['class' => 'form-control']) }}
+            {{ Form::button('<i class="fas fa-search"></i>', ['class' => 'btn btn-info','onclick'=>'submit()']) }}
+        </div>
+    {!! Form::close() !!}
     <?php
         $rows=$restaurants->count()/4;
     ?>

@@ -106,7 +106,7 @@
         </nav>
 
         <main class="py-4">
-            <div class="section">
+            <div class="container">
                 @if (Session::has('success'))
                     <div class="alert alert-success">
                         {{ Session::get('success') }}
@@ -114,6 +114,14 @@
                 @endif
             </div>
             
+            <div class="container">
+                @if (Session::has('failure'))
+                    <div class="alert alert-danger">
+                        {{ Session::get('failure') }}
+                    </div>
+                @endif
+            </div>
+
             @yield('content')
         </main>
     </div>

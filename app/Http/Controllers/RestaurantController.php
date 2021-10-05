@@ -31,6 +31,11 @@ class RestaurantController extends Controller
      */
     public function create()
     {
+        if(Auth::user()->type != 'admin' | Auth::user()->type != 'owner'){
+            Session::flash('failure', 'El usuario no tiene permiso para esta accion');
+            return redirect(route('home'));
+        }
+
         $categories = Category::orderBy('name','asc')->pluck('name','id');
         return view('restaurants.create',compact('categories'));
     }
@@ -43,18 +48,11 @@ class RestaurantController extends Controller
      */
     public function store(StoreRestaurantRequest $request)
     {
-        //TODO: realizar la validacion de los datos de entrada
+        if(Auth::user()->type != 'admin' | Auth::user()->type != 'owner'){
+            Session::flash('failure', 'El usuario no tiene permiso para esta accion');
+            return redirect(route('home'));
+        }
         $inputs = $request->all();
-
-        /* $validated = $request->validate([
-            'name'        => 'required|string|min:5|max:50',
-            'description' => 'required|string|min:10',
-            'city'        => 'required|string|min:5|max:30',
-            'phone'       => 'required|alpha_dash|min:10|max:10',
-            'category_id' => 'required|exists:categories,id',
-            'delivery'    => ['required',Rule::in(['y','n'])],
-        ]);
- */
         $restaurant = new Restaurant();
         $restaurant->fill($inputs);
         $restaurant->user_id = Auth::id();
@@ -126,9 +124,15 @@ class RestaurantController extends Controller
 
 
     ////////////////////////////////
-    public function showFrontPage(){
-        $restaurants=Restaurant::orderBy('name','asc')->paginate(8); 
+    public function showFrontPage(Request $request){
 
-        return view('front_page.index',compact('restaurants'));
+        if(!isset($request['filter']))
+            $restaurants=Restaurant::orderBy('name','asc')->paginate(8); 
+        else 
+            $restaurants=Restaurant::orderBy('name','asc')->where('category_id','=',$request['filter'])->paginate(8); 
+        
+        $categories=Category::orderBy('name','asc')->pluck('name','id');
+        $filter=$request['filter'] ?? null;
+        return view('front_page.index',compact('restaurants','categories','filter'));
     }
 }
