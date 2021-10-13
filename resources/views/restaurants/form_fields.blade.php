@@ -27,3 +27,43 @@
     {{ Form::label('category_id','Categoria',['class' => 'form-label']) }}
     {{ Form::select('category_id', $categories,null,['class' => 'form-control']); }}
 </div>
+
+<div class="mb-3">
+    {{ Form::label('schedule','Horario de apertura: ',['class' => 'form-label']) }}
+    {{ Form::time('schedule',null,['class' => 'form-control']); }}
+</div>
+
+<div class="mb-3">
+    {{ Form::label('latitude','Latitud',['class' => 'form-label']) }}
+    {{ Form::text('latitude',null,['class' => 'form-control']); }}
+</div>
+
+<div class="mb-3">
+    {{ Form::label('longitude','Longitud',['class' => 'form-label']) }}
+    {{ Form::text('longitude',null,['class' => 'form-control']); }}
+</div>
+
+<div class="mb-3">
+    {{ Form::label('logo','Logo',['class' => 'form-label']) }}
+    {{ Form::file('logo',null,['class' => 'form-control']); }}
+</div>
+
+<div class="mb-3">
+    {{ Form::label('facebook','Facebook',['class' => 'form-label']) }}
+    {{ Form::url('facebook',null,['class' => 'form-control']); }}
+</div>
+
+<div class="mb-3">
+    {{ Form::label('twitter','Twitter',['class' => 'form-label']) }}
+    {{ Form::url('twitter',null,['class' => 'form-control']); }}
+</div>
+
+<div class="mb-3">
+    {{ Form::label('instagram','Instagram',['class' => 'form-label']) }}
+    {{ Form::url('instagram',null,['class' => 'form-control']); }}
+</div>
+
+<div class="mb-3">
+    {{ Form::label('youtube','Youtube',['class' => 'form-label']) }}
+    {{ Form::url('youtube',null,['class' => 'form-control']); }}
+</div>

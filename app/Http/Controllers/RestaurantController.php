@@ -31,7 +31,7 @@ class RestaurantController extends Controller
      */
     public function create()
     {
-        if(Auth::user()->type != 'admin' | Auth::user()->type != 'owner'){
+        if(Auth::user()->type != 'admin' & Auth::user()->type != 'owner'){
             Session::flash('failure', 'El usuario no tiene permiso para esta accion');
             return redirect(route('home'));
         }
@@ -48,7 +48,7 @@ class RestaurantController extends Controller
      */
     public function store(StoreRestaurantRequest $request)
     {
-        if(Auth::user()->type != 'admin' | Auth::user()->type != 'owner'){
+        if(Auth::user()->type != 'admin' & Auth::user()->type != 'owner'){
             Session::flash('failure', 'El usuario no tiene permiso para esta accion');
             return redirect(route('home'));
         }

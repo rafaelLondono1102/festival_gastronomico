@@ -14,6 +14,6 @@
 </div>
 
 <div class="mb-3">
-    {{ Form::label('type','Tiene domicilio?',['class' => 'form-label']) }}
+    {{ Form::label('type','Tipo',['class' => 'form-label']) }}
     {{ Form::select('type', ['user' => 'Usuario', 'owner' => 'Dueño', 'admin' => 'Administrador'],null,['class' => 'form-control']); }}
 </div>
