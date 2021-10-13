@@ -136,4 +136,9 @@ class RestaurantController extends Controller
         $filter=$request['filter'] ?? null;
         return view('front_page.index',compact('restaurants','categories','filter'));
     }
+
+    public function showRestaurant(Request $request,Restaurant $restaurant){
+        $comments = $restaurant->comments()->get();
+        return view('front_page.show',compact('restaurant','comments'));
+    }
 }

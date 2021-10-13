@@ -24,13 +24,14 @@ use App\Http\Controllers\RestaurantController;
 Auth::routes();
 //Publicas
 Route::get('/', [App\Http\Controllers\RestaurantController::class, 'showFrontPage'])->name('front_page.index');
+Route::get('/show/{restaurant}',[App\Http\Controllers\RestaurantController::class,'showRestaurant'])->name('front_page.show');
 ///////////////////////////////////////////////////////////////////////////
 //Privadas
 Route::middleware(['auth'])->group(function () {
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     Route::resource('restaurants', App\Http\Controllers\RestaurantController::class);
     Route::resource('categories', App\Http\Controllers\CategoryController::class);
-   Route::resource('comments', App\Http\Controllers\CommentController::class); 
+    Route::resource('comments', App\Http\Controllers\CommentController::class); 
 });
 
 

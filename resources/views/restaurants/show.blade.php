@@ -47,12 +47,15 @@
                                 </div>
                                 {{ $comment->comment }}
                             </div>
-                            @if (Auth::user()->type == 'admin')
-                                {!! Form::open(['route' => ['comments.destroy',$comment->id],'method' => 'delete',
-                                'onsubmit' => 'return confirm(\'Esta segura que desea remover el restaurante\nEsta accion no se puede deshacer\')']) !!}
-                                    <button type="submit" class="btn btn-danger mt-3" onsubmit="">Remover</button>
-                                {!! Form::close() !!}
+                            @if (Auth::check())
+                                @if (Auth::user()->type == 'admin')
+                                    {!! Form::open(['route' => ['comments.destroy',$comment->id],'method' => 'delete',
+                                    'onsubmit' => 'return confirm(\'Esta segura que desea remover el restaurante\nEsta accion no se puede deshacer\')']) !!}
+                                        <button type="submit" class="btn btn-danger mt-3" onsubmit="">Remover</button>
+                                    {!! Form::close() !!}
+                                @endif
                             @endif
+                            
                             
                         </li>
                     </ol>
@@ -61,12 +64,15 @@
         @endforeach
 
             <div class="btn-group" role="group">
-                @if (Auth::user()->type == 'admin' | Auth::user()->type == 'owner')
-                    <a href="{{ route('restaurants.edit',$restaurant->id) }}" class="btn btn-warning mt-3">Editar</a>
-                    {{ Form::open(['route' => ['restaurants.destroy',$restaurant->id], 'method' => 'delete','onsubmit' => 'xxxxxx']) }}
-                        <button type="submit" class="btn btn-danger mt-3">Remover</button>
-                    {!! Form::close() !!}
+                @if (Auth::check())
+                    @if (Auth::user()->type == 'admin' | Auth::user()->type == 'owner')
+                        <a href="{{ route('restaurants.edit',$restaurant->id) }}" class="btn btn-warning mt-3">Editar</a>
+                        {{ Form::open(['route' => ['restaurants.destroy',$restaurant->id], 'method' => 'delete','onsubmit' => 'xxxxxx']) }}
+                            <button type="submit" class="btn btn-danger mt-3">Remover</button>
+                        {!! Form::close() !!}
+                    @endif
                 @endif
+                
                 <a href="{{ URL::previous() }}" class="btn btn-primary mt-3">Volver</a>
             </div>  
        
