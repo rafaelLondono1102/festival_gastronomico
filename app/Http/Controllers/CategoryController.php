@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
+use App\Http\Requests\StoreCategoryRequest;
 
 class CategoryController extends Controller
 {
@@ -25,7 +27,11 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        if(Auth::user()->type != 'admin'){
+            Session::flash('failure', 'El usuario no tiene permiso para esta accion');
+            return redirect(route('home'));
+        }
+        return view('categories.create');
     }
 
     /**
@@ -34,9 +40,20 @@ class CategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreCategoryRequest $request)
     {
-        //
+        if(Auth::user()->type != 'admin'){
+            Session::flash('failure', 'El usuario no tiene permiso para esta accion');
+            return redirect(route('home'));
+        }
+        $inputs = $request->all();
+        $category = new Category();
+        $category->fill($inputs);
+        $category->save();
+
+        Session::flash('success', 'Categoria agregada exitosamente');
+
+        return redirect(route('categories.index'));
     }
 
     /**
@@ -68,7 +85,7 @@ class CategoryController extends Controller
      * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Category $category)
+    public function update(StoreCategoryRequest $request, Category $category)
     {
         //
     }
