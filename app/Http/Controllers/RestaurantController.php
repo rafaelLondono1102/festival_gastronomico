@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Models\Restaurant;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use App\Http\Requests\StoreRestaurantRequest;
 
@@ -72,7 +73,8 @@ class RestaurantController extends Controller
      */
     public function show(Restaurant $restaurant)
     {
-        return view('restaurants.show',compact('restaurant'));
+        $comments = $restaurant->comments()->get();
+        return view('restaurants.show',compact('restaurant','comments'));
     }
 
     /**
@@ -97,7 +99,6 @@ class RestaurantController extends Controller
     public function update(StoreRestaurantRequest $request, Restaurant $restaurant)
     {
         $inputs = $request->all();
-    
         $restaurant->fill($inputs);
         $restaurant->user_id = Auth::id();
         $restaurant->save();

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Comment;
 use App\Models\Restaurant;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
@@ -46,5 +47,9 @@ class User extends Authenticatable
 
     public function restaurants(){
         return $this->hasMany(Restaurant::class);
+    }
+
+    public function comment(){
+        return $this->hasMany(Comment::class);
     }
 }
