@@ -12,6 +12,7 @@
             {{ Form::open(['route' => ['categories.destroy',$category->id], 'method' => 'delete','onsubmit' => 'xxxxxx']) }}
                 <button type="submit" class="btn btn-danger mt-3">Remover</button>
             {!! Form::close() !!}
+            <a href="{{ URL::previous() }}" class="btn btn-primary mt-3">Volver</a>
        </div>
     </div>
 @endsection
