@@ -95,6 +95,6 @@ class CommentController extends Controller
     {
         $comment->delete();
         Session::flash('success', 'Comentario removido exitosamente');
-        return redirect(route('restaurants.index'));
+        return redirect()->back();
     }
 }

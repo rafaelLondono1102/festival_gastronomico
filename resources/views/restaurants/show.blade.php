@@ -18,8 +18,8 @@
             {!! Form::open(['route' => ['comments.store'],'method' => 'post']) !!}
                 <div class="mb-3">
                     {{ Form::label('comment','Comentario',['class' => 'form-label']) }}
-                    {{ Form::text('comment',null,['class' => 'form-control']) }}
-                    {{ Form::hidden('restaurant_id', $restaurant->id),[] }}
+                    {{ Form::textArea('comment',null,['class' => 'form-control']) }}
+                    {{ Form::hidden('restaurant_id', $restaurant->id) }}
                 </div>
                 <div class="mb-3">
                     {{ Form::label('score','Puntuacion',['class' => 'form-label']) }}
@@ -41,12 +41,19 @@
                                     <div class="row">
                                         <b>{{ $comment->user->name}}</b>
                                         @for ($i = 0; $i < $comment->score; $i++)
-                                        <i class="fas fa-star"></i>  
+                                            <i class="fas fa-star"></i>  
                                         @endfor
                                     </div>
                                 </div>
                                 {{ $comment->comment }}
                             </div>
+                            @if (Auth::user()->type == 'admin')
+                                {!! Form::open(['route' => ['comments.destroy',$comment->id],'method' => 'delete',
+                                'onsubmit' => 'return confirm(\'Esta segura que desea remover el restaurante\nEsta accion no se puede deshacer\')']) !!}
+                                    <button type="submit" class="btn btn-danger mt-3" onsubmit="">Remover</button>
+                                {!! Form::close() !!}
+                            @endif
+                            
                         </li>
                     </ol>
                 </div>
