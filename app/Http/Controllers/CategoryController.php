@@ -87,7 +87,14 @@ class CategoryController extends Controller
      */
     public function update(StoreCategoryRequest $request, Category $category)
     {
-        //
+        $inputs = $request->all();
+    
+        $category->fill($inputs);
+        $category->save();
+
+        Session::flash('success', 'Categoria editada exitosamente');
+
+        return redirect(route('categories.index'));
     }
 
     /**
