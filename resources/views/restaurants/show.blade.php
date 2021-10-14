@@ -3,9 +3,11 @@
     <div class="container">
         <h3>
             <small class="text-muted">Restaurante</small>
-            {{$restaurant->name}}
+            {{ $restaurant->name }}
         </h3>
-        Sobre nosotros: {{$restaurant->description}}
+        <img src="../images/{{ $restaurant->logo }}" width="150" />
+        <br>
+        Sobre nosotros: {{ $restaurant->description }}
         <br>
         Estamos ubicados en: {{ $restaurant->city }} 
         <br>
@@ -14,7 +16,7 @@
         @if ($restaurant->delivery == 'y')
             Tenemos domicilios al numero: {{ $restaurant->phone}}<br>
         @else
-            Contactenos al numero: {{ $restaurant->phone}}<br>
+            Contactenos al numero: {{ $restaurant->phone }}<br>
         @endif
         <br>
         Siguenos en Nuestras Redes Sociales:

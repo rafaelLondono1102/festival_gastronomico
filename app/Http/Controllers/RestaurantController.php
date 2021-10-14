@@ -53,15 +53,23 @@ class RestaurantController extends Controller
             return redirect(route('home'));
         }
         $inputs = $request->all();
+        if($archivo=$request->file('logo')){
+            $nombre=$archivo->getClientOriginalName();
+            $archivo->move('images',$nombre);
+            $inputs['logo']=$nombre;
+        }
+
+
         $restaurant = new Restaurant();
         $restaurant->fill($inputs);
         $restaurant->user_id = Auth::id();
         $restaurant->save();
-
+        
         Session::flash('success', 'Restaurante agregado exitosamente');
 
         return redirect(route('restaurants.index'));
 
+        
     }
 
     /**
