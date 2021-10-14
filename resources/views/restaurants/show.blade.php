@@ -33,7 +33,6 @@
             {!! Form::close() !!}
         </div>
             Contactenos al numero {{ $restaurant->phone}}<br>
-       @endif
         <br>
 
        <div class="jumbotron">
