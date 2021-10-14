@@ -26,7 +26,12 @@
                               <h5 class="card-title">{{ $restaurant->name }}</h5>
                               <h4><small class='text-muted'>{{ $restaurant->category->name }}</small></h4>
                               <p class="card-text">{{ $restaurant->description }}</p>
-                              <a href="{{ route("restaurants.show", $restaurant->id) }}" class="btn btn-primary">Visitenos</a>
+                              @if (Auth::check())
+                                <a href="{{ route("restaurants.show", $restaurant->id) }}" class="btn btn-primary">Visitenos</a>    
+                              @else
+                                <a href="{{ route("front_page.show", $restaurant->id) }}" class="btn btn-primary">Visitenos</a>
+                              @endif
+                              
                             </div>
                           </div>
                     </div>
