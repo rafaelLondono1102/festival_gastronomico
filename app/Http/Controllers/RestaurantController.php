@@ -60,10 +60,10 @@ class RestaurantController extends Controller
             $inputs['logo']=$nombre;
         }
 
-
         $restaurant = new Restaurant();
         $restaurant->fill($inputs);
         $restaurant->user_id = Auth::id();
+        $restaurant->logo=$inputs['logo'];
         $restaurant->save();
         
         Session::flash('success', 'Restaurante agregado exitosamente');
