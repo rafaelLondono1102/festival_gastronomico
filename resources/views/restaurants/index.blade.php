@@ -12,14 +12,14 @@
        @foreach ($restaurants as $restaurant)
             <li class="list-group-item h4">
                 <img src="../images/{{ $restaurant->logo }}" width="100">
-                <a href="{{route('restaurants.show',$restaurant->id)}}" title="Visitar este restaurante">{{ $restaurant->name }}</a>
+                <a href="{{route('restaurants.show',$restaurant->id)}}" title="Visitar este restaurante" class="ml-3">{{ $restaurant->name }}</a>
                 <div class="btn-group" role="group">
-                    <a href="{{ route('restaurants.edit',$restaurant->id) }}" class="btn btn-warning mt-3">Editar</a>
+                    <a href="{{ route('restaurants.edit',$restaurant->id) }}" class="btn btn-warning  ml-3">Editar</a>
                     {{ Form::open(['route' => ['restaurants.destroy',$restaurant->id], 
                     'method' => 'delete',
                     'onsubmit' => 'return confirm(\'Esta segura que desea remover el restaurante\nEsta accion no se puede deshacer\')'
                     ]) }}
-                        <button type="submit" class="btn btn-danger mt-3">Remover</button>
+                        <button type="submit" class="btn btn-danger  ml-3">Remover</button>
                    {!! Form::close() !!}
                 </div>
                

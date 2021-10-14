@@ -19,7 +19,7 @@
                     <?php
                         $restaurant = $restaurants[($i*4)+$j]
                     ?>
-                    <div class="col-3 mb-3">
+                    <div class="col-3 mb-3 mt-3">
                         <div class="card">
                             <img src="../images/{{ $restaurant->logo }}" height="200" class="card-img-top" alt="...">
                             <div class="card-body">
