@@ -21,7 +21,7 @@
                     ?>
                     <div class="col-3 mb-3 mt-3">
                         <div class="card">
-                            <img src="../images/{{ $restaurant->logo }}" height="200" class="card-img-top" alt="...">
+                            <img src="{{ asset('images/'.$restaurant->logo) }}" height="200" class="card-img-top" alt="...">
                             <div class="card-body">
                               <h5 class="card-title">{{ $restaurant->name }}</h5>
                               <h4><small class='text-muted'>{{ $restaurant->category->name }}</small></h4>

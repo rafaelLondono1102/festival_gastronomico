@@ -1,39 +1,57 @@
 @extends('layouts.app')
 @section('content')
     <div class="container">
-        <h3>
-            <small class="text-muted">Restaurante</small>
-            {{ $restaurant->name }}
-        </h3>
-        <img src="../images/{{ $restaurant->logo }}" width="150" />
-        <br>
-        Sobre nosotros: {{ $restaurant->description }}
-        <br>
-        Estamos ubicados en: {{ $restaurant->city }} 
-        <br>
-        Abrimos a partir de las: {{ $restaurant->schedule ?? "Sin agenda definida"}}
-        <br>
-        @if ($restaurant->delivery == 'y')
-            Tenemos domicilios al numero: {{ $restaurant->phone}}<br>
-        @else
-            Contactenos al numero: {{ $restaurant->phone }}<br>
-        @endif
-        <br>
-        Siguenos en Nuestras Redes Sociales:
-        <br>
-        <a href="{{$restaurant->facebook}}">Facebook</a>
-        <a href="{{$restaurant->twitter}}">Twitter</a>
-        <a href="{{$restaurant->instagram}}">Instagram</a>
-        <a href="{{$restaurant->youtube}}">Youtube</a>
-        <br>
-        <div class="btn-group" role="group">
-            <a href="{{ route('restaurants.edit',$restaurant->id) }}" class="btn btn-warning mt-3">Editar</a>
-            {{ Form::open(['route' => ['restaurants.destroy',$restaurant->id], 'method' => 'delete','onsubmit' => 'xxxxxx']) }}
-                <button type="submit" class="btn btn-danger mt-3">Remover</button>
-            {!! Form::close() !!}
+        
+        <div class="row">
+            <div class="col s6">
+                <h3>
+                    <b>{{ $restaurant->name }}</b>
+                </h3>
+                <br>
+                <img src="{{ asset('images/'.$restaurant->logo) }}" width="400" height="400"/>
+                <br> 
+            </div>
+            
+            <div class="jumbotron col s6">
+                <b>Estamos ubicados en:</b> 
+                {{ $restaurant->city }} 
+                <br>
+                <b>Abrimos a partir de las:</b> 
+                {{ $restaurant->schedule ?? "Sin agenda definida"}}
+                <br>
+                @if ($restaurant->delivery == 'y')
+                    <b>Tenemos domicilios al numero:</b> 
+                    {{ $restaurant->phone}}
+                    <br>
+                @else
+                    <b>Por el momento no se tiene domicilios, si desea puede contactarce con</b> 
+                    {{ $restaurant->phone }}
+                    <b>para reservar una mesa</b>
+                @endif
+                <br>
+                <b>Sobre nosotros:</b> 
+                {{ $restaurant->description }}
+                <br>
+                <br>
+                <br>
+                <br>
+                <b>Siguenos en Nuestras Redes Sociales:</b>
+                <br>
+                @if ($restaurant->facebook)
+                    <a href="{{$restaurant->facebook}}">Facebook</a>
+                @endif
+                @if ($restaurant->twitter)
+                    <a href="{{$restaurant->twitter}}">Twitter</a>
+                @endif
+                @if ($restaurant->instagram)
+                    <a href="{{$restaurant->instagram}}">Instagram</a>
+                @endif
+                @if ($restaurant->youtube)
+                    <a href="{{$restaurant->youtube}}">Youtube</a>
+                @endif
+            </div>
         </div>
-            Contactenos al numero {{ $restaurant->phone}}<br>
-        <br>
+        
 
        <div class="jumbotron">
            <h3>Cuentanos que opinas !</h3>

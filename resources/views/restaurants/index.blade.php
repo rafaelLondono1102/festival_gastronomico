@@ -11,7 +11,7 @@
    <ul class="list-group list-group-flush">
        @foreach ($restaurants as $restaurant)
             <li class="list-group-item h4">
-                <img src="../images/{{ $restaurant->logo }}" width="100">
+                <img src="{{ asset('images/'.$restaurant->logo) }}" width="100">
                 <a href="{{route('restaurants.show',$restaurant->id)}}" title="Visitar este restaurante" class="ml-3">{{ $restaurant->name }}</a>
                 <div class="btn-group" role="group">
                     <a href="{{ route('restaurants.edit',$restaurant->id) }}" class="btn btn-warning  ml-3">Editar</a>
