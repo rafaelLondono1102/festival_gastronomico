@@ -58,12 +58,11 @@ class RestaurantController extends Controller
             $nombre=$archivo->getClientOriginalName();
             $archivo->move('images',$nombre);
             $inputs['logo']=$nombre;
+            $restaurant->logo=$inputs['logo'];
         }
-
         $restaurant = new Restaurant();
         $restaurant->fill($inputs);
         $restaurant->user_id = Auth::id();
-        $restaurant->logo=$inputs['logo'];
         $restaurant->save();
         
         Session::flash('success', 'Restaurante agregado exitosamente');
