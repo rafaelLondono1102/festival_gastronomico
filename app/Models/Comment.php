@@ -13,7 +13,9 @@ class Comment extends Model
 
     protected $fillable = [
         'comment',
-        'score'
+        'score',
+        'user_id',
+        'restaurant_id'
     ];
 
     public function restaurant(){
