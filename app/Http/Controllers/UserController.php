@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\StoreUserRequest;
+use Illuminate\Support\Facades\Session;
 
 
 class UserController extends Controller
@@ -52,6 +53,7 @@ class UserController extends Controller
         $inputs = $request->all();
         $user = new User();
         $user->fill($inputs);
+        $user->password = Hash::make($inputs['password']);
         $user->save();
 
         Session::flash('success', 'Usuario agregado exitosamente');
