@@ -39,7 +39,7 @@ class CommentController extends Controller
      */
     public function show(Comment $comment)
     {
-        //
+        return response()->json(['data'=>$comment],200);
     }
 
     /**
