@@ -53,6 +53,7 @@ class RestaurantController extends Controller
             Session::flash('failure', 'El usuario no tiene permiso para esta accion');
             return redirect(route('home'));
         }
+        $restaurant = new Restaurant();
         $inputs = $request->all();
         if($archivo=$request->file('logo')){
             $nombre=$archivo->getClientOriginalName();
@@ -60,7 +61,6 @@ class RestaurantController extends Controller
             $inputs['logo']=$nombre;
             $restaurant->logo=$inputs['logo'];
         }
-        $restaurant = new Restaurant();
         $restaurant->fill($inputs);
         $restaurant->user_id = Auth::id();
         $restaurant->save();
