@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\api\v1\RestaurantStoreRequest;
 use App\Http\Requests\api\v1\RestaurantUpdateRequest;
+use App\Http\Resources\RestaurantResource;
 
 class RestaurantController extends Controller
 {
@@ -18,7 +19,10 @@ class RestaurantController extends Controller
     public function index() //Funciona
     {
         $restaurants = Restaurant::orderBy('name','asc')->get();
-        return response()->json(['data'=>$restaurants], 200);
+        return RestaurantResource::collection($restaurants);
+        
+        //$restaurants = Restaurant::orderBy('name','asc')->get();
+        //return response()->json(['data'=>$restaurants], 200);
     }
 
     /**
@@ -30,7 +34,12 @@ class RestaurantController extends Controller
     public function store(RestaurantStoreRequest $request)
     {
         $restaurant = Restaurant::create($request->all());
-        return response()->json(['data' => $restaurant], 201);
+        return (new RestaurantResource($restaurant))
+                ->response()
+                ->setStatusCode(201);
+
+        //$restaurant = Restaurant::create($request->all());
+        //return response()->json(['data' => $restaurant], 201);
     }
 
     /**
@@ -41,7 +50,11 @@ class RestaurantController extends Controller
      */
     public function show(Restaurant $restaurant)//Funciona
     {
-        return response()->json(['data'=>$restaurant],200);
+        return (new RestaurantResource($restaurant))
+                ->response()
+                ->setStatusCode(200);
+
+        //return response()->json(['data'=>$restaurant],200);
     }
 
     /**
@@ -54,7 +67,12 @@ class RestaurantController extends Controller
     public function update(RestaurantUpdateRequest $request, Restaurant $restaurant)
     {
         $restaurant->update($request->all());
-        return response()->json(['data'=> $restaurant],200);
+        return (new RestaurantResource($restaurant))
+                ->response()
+                ->setStatusCode(200);
+
+        //$restaurant->update($request->all());
+        //return response()->json(['data'=> $restaurant],200);
     }
 
     /**

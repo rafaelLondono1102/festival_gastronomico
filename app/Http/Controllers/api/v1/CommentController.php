@@ -5,6 +5,7 @@ namespace App\Http\Controllers\api\v1;
 use App\Http\Controllers\Controller;
 use App\Models\Comment;
 use Illuminate\Http\Request;
+use App\Http\Resources\CommentResource;
 
 class CommentController extends Controller
 {
@@ -15,8 +16,11 @@ class CommentController extends Controller
      */
     public function index()
     {
-        $comments = Comment::orderBy('score','desc')->get();
-        return response()->json(['data'=>$comments],200);
+        $comments = Comment::orderBy('score','desc')->paginate();
+        return CommentResource::collection($comments);
+        
+        //$comments = Comment::orderBy('score','desc')->get();
+        //return response()->json(['data'=>$comments],200);
     }
 
     /**
@@ -28,7 +32,12 @@ class CommentController extends Controller
     public function store(Request $request)
     {
         $comment = Comment::create($request->all());
-        return response()->json(['data'=>$comment],200);
+        return (new CommentResource($comment))
+                ->response()
+                ->setStatusCode(200);
+
+        //$comment = Comment::create($request->all());
+        //return response()->json(['data'=>$comment],200);
     }
 
     /**
@@ -39,7 +48,11 @@ class CommentController extends Controller
      */
     public function show(Comment $comment)
     {
-        return response()->json(['data'=>$comment],200);
+        return (new CommentResource($comment))
+                ->response()
+                ->setStatusCode(200);
+
+        //return response()->json(['data'=>$comment],200);
     }
 
     /**
