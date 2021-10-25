@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -15,9 +16,9 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::orderBy('name', 'asc')->get();
+        $users = User::orderBy('name', 'asc')->paginate();
  
-        return response()->json(['data' => $users], 200);
+        return UserResource::collection($users);
     }
 
     /**
@@ -39,7 +40,9 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        return response()->json(['data' => $user], 200);
+        return (new UserResource($user))
+                ->response()
+                ->setStatusCode(200);
     }
 
     /**
