@@ -24,3 +24,12 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::apiResource('v1/restaurants', RestaurantController::class);
 Route::apiResource('v1/comments', CommentController::class);
 Route::apiResource('users', UserController::class);
+
+Route::post('/v1/login',[App\Http\Controllers\api\v1\AuthController::class,'login'])->name('api.login');
+
+
+ Route::middleware(['auth:sanctum'])->group(function() {
+    Route::post('/v1/logout',[App\Http\Controllers\api\v1\AuthController::class,'logout'])->name('api.logout');
+
+});
+   
