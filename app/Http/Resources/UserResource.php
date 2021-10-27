@@ -19,7 +19,10 @@ class UserResource extends JsonResource
             'email' => $this->email,
             'user_id' => $this->id,
             'type' => $this->type,
-            'restaurants' => RestaurantResource::collection($this->restaurants)
+            'restaurants' => $this->restaurants->map(function ($restaurant) {
+                $parsed_url = parse_url(route('restaurants.show',[$restaurant->id]));
+                return $parsed_url['path'];
+            })
         ];
     }
 }
