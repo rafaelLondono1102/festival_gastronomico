@@ -5,6 +5,7 @@ namespace App\Http\Controllers\api\v1;
 use App\Models\Comment;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Resources\CommentResource;
 
 class CommentController extends Controller
@@ -29,6 +30,7 @@ class CommentController extends Controller
     public function store(Request $request)
     {
         $comment = Comment::create($request->all());
+        $comment->user_id = Auth::user()->id;
         return (new CommentResource($comment))
                 ->response()
                 ->setStatusCode(200);

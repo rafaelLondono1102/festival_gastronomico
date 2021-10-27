@@ -29,7 +29,6 @@ class CommentStoreRequest extends FormRequest
         return [
             "comment" => "required|min:3",
             "score" => "required|numeric|min:1|max:5",
-            "user_id" => "required|exists:users,id",
             "restaurant_id" => "required|exists:restaurants,id"
         ];
     }

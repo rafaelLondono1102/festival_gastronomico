@@ -18,7 +18,8 @@ class UserResource extends JsonResource
             'name' => $this->name,
             'email' => $this->email,
             'user_id' => $this->id,
-            'restaurants' => route('restaurants.index')
+            'type' => $this->type,
+            'restaurants' => RestaurantResource::collection($this->restaurants)
         ];
     }
 }

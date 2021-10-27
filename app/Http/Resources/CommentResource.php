@@ -18,8 +18,8 @@ class CommentResource extends JsonResource
             'comment' => $this->comment,
             'score' => $this->score,
             'id' => $this->id,
-            'restaurant' => $this->restaurant->name,
-            'user' => $this->user->name
+            'restaurant' => route('restaurants.show',$this->restaurant->id),
+            'user' => new UserResource($this->user)
         ];
     }
 }

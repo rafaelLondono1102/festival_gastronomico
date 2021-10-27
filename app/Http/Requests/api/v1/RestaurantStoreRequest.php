@@ -29,7 +29,6 @@ class RestaurantStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'user_id' => 'required|exists:users,id',
             'name' => "required|unique:restaurants,name|min:5|max:50",
             'description' => 'required|string|min:10',
             'city'        => 'required|string|min:5|max:30',
