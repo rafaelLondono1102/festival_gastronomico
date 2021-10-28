@@ -30,7 +30,6 @@ class RestaurantController extends Controller
      */
     public function store(RestaurantStoreRequest $request)
     {
-        dd(Auth::user());
         $restaurant = new Restaurant();
         $restaurant->fill($request->all());
         $restaurant->user_id = Auth::user()->id;

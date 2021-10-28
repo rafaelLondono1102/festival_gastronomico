@@ -29,8 +29,10 @@ class CommentController extends Controller
      */
     public function store(Request $request)
     {
-        $comment = Comment::create($request->all());
+        $comment = new Comment();
+        $comment->fill($request->all());
         $comment->user_id = Auth::user()->id;
+        $comment->save();
         return (new CommentResource($comment))
                 ->response()
                 ->setStatusCode(200);
